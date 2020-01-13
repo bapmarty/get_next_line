@@ -6,7 +6,7 @@
 /*   By: bapmarti <bapmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 18:01:13 by bapmarti          #+#    #+#             */
-/*   Updated: 2020/01/13 19:17:57 by bapmarti         ###   ########.fr       */
+/*   Updated: 2020/01/13 21:12:15 by bapmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,33 @@ static int		find_next_line(char *str)
 	int pos;
 
 	pos = 0;
-	while (str[pos] != '\0' && str[pos] != '\n')
+	while (str[pos] != '\0')
+	{
+		if (str[pos] == '\n')
+			return (pos);
 		pos++;
-	return (pos);
+	}
+	return (-1);
 }
 
 static int		get_line(char **str, char **line)
 {
 	char	*tmp;
+	int		pos;
 
-	*line = ft_substr(*str, 0, find_next_line(*str));
-	tmp = ft_substr(*str, find_next_line(*str) + 1, ft_strlen(*str) + 1);
+	if ((pos = find_next_line(*str)) == -1)
+		return (-1);
+	*line = ft_substr(*str, 0, pos);
+	tmp = ft_substr(*str, pos + 1, ft_strlen(*str) - pos);
 	free(*str);
 	*str = tmp;
 	return (1);
 }
 
-static int		free_arr(char **curs, int value)
+static int		free_arr(char **str, int value)
 {
-	free(*curs);
-	*curs = NULL;
+	free(*str);
+	*str = NULL;
 	return (value);
 }
 
@@ -57,12 +64,18 @@ int				get_next_line(int fd, char **line)
 		buf[ret] = '\0';
 		if (str == NULL)
 			str = ft_strnew(1);
-		str = ft_strjoin(str, buf);
 		tmp = str;
-		if (ft_strchr(tmp, '\n'))
+		str = ft_strjoin(str, buf);
+		free(tmp);
+		if (ft_strchr(str, '\n'))
 			break ;
 	}
 	free(buf);
 	buf = NULL;
-	return (get_line(&str, line));
+	if (ret < 0)
+		return (-1);
+	int i = get_line(&str, line);
+
+	return (i);
+	//return (get_line(&str, line));
 }
