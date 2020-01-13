@@ -6,23 +6,29 @@
 /*   By: bapmarti <bapmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 18:01:13 by bapmarti          #+#    #+#             */
-/*   Updated: 2020/01/13 18:15:47 by bapmarti         ###   ########.fr       */
+/*   Updated: 2020/01/13 19:17:57 by bapmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 #include <stdio.h>
 
+static int		find_next_line(char *str)
+{
+	int pos;
+
+	pos = 0;
+	while (str[pos] != '\0' && str[pos] != '\n')
+		pos++;
+	return (pos);
+}
+
 static int		get_line(char **str, char **line)
 {
 	char	*tmp;
-	int		len;
 
-	len = 0;
-	while (*str[len] != '\n' || *str[len] != '\0')
-		len++;
-	*line = ft_substr(*str, 0, len);
-	tmp = ft_substr(*str, len + 1, ft_strlen(*str) + 1);
+	*line = ft_substr(*str, 0, find_next_line(*str));
+	tmp = ft_substr(*str, find_next_line(*str) + 1, ft_strlen(*str) + 1);
 	free(*str);
 	*str = tmp;
 	return (1);
@@ -43,7 +49,6 @@ int				get_next_line(int fd, char **line)
 	ssize_t			ret;
 
 
-	tmp = NULL;
 	if (BUFFER_SIZE < 1 || fd < 0 || !line
 		|| !(buf = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
 		return (free_arr(&str, -1));
@@ -51,15 +56,13 @@ int				get_next_line(int fd, char **line)
 	{
 		buf[ret] = '\0';
 		if (str == NULL)
-		{
-			printf("len buf: %zu\n", ft_strlen(buf));
-			str = ft_bzero(tmp, 1);
-			printf("bonjour\n");
-		}
-		str = ft_strjoin(tmp, buf);
-		if (ft_strchr(str, '\n'))
+			str = ft_strnew(1);
+		str = ft_strjoin(str, buf);
+		tmp = str;
+		if (ft_strchr(tmp, '\n'))
 			break ;
 	}
 	free(buf);
+	buf = NULL;
 	return (get_line(&str, line));
 }

@@ -6,7 +6,7 @@
 /*   By: bapmarti <bapmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 14:42:35 by bapmarti          #+#    #+#             */
-/*   Updated: 2020/01/13 18:01:53 by bapmarti         ###   ########.fr       */
+/*   Updated: 2020/01/13 18:38:13 by bapmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,29 +24,32 @@ size_t	ft_strlen(const char *s)
 	return (size);
 }
 
-char	*ft_strjoin(char *s1, const char *s2)
+char	*ft_strjoin(const char *s1, const char *s2)
 {
-	size_t	len;
-	char	*s;
 	size_t	i;
+	size_t	j;
+	size_t	s1len;
+	size_t	s2len;
+	char	*str;
 
-	len = ft_strlen(s1) + ft_strlen(s2);
-	if (!(s = malloc(sizeof(char) * (len + 1))))
+	s1len = ft_strlen(s1);
+	s2len = ft_strlen(s2);
+	if (!(str = malloc(sizeof(char) * (s1len + s2len + 1))))
 		return (NULL);
 	i = 0;
-	while (i < ft_strlen(s1))
+	while (s1[i])
 	{
-		s[i] = s1[i];
-	 	i++;
-	}
-	i = 0;
-	while (i < ft_strlen(s2))
-	{
-		s[i] = s2[i];
+		str[i] = s1[i];
 		i++;
 	}
-	s1 = s;
-	return (s1);
+	j = 0;
+	while (s2[j])
+	{
+		str[i + j] = s2[j];
+		j++;
+	}
+	str[i + j] = '\0';
+	return (str);
 }
 
 char	*ft_substr(const char *s, unsigned int start, size_t len)
@@ -69,13 +72,20 @@ char	*ft_substr(const char *s, unsigned int start, size_t len)
 	return (newstr);
 }
 
-void	*ft_bzero(void *s, size_t n)
+char	*ft_strnew(size_t size)
 {
-	unsigned char *p;
+	char	*s;
+	size_t	i;
 
-	p = s;
-	while (n-- > 0)
-		*p++ = '\0';
+	i = 0;
+	if (!(s = malloc(sizeof(char) * (size + 1))))
+		return (NULL);
+	while (i < size)
+	{
+		s[i] = '\0';
+		i++;
+	}
+	s[i] = '\0';
 	return (s);
 }
 
