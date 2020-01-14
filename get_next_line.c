@@ -69,11 +69,7 @@ int				get_next_line(int fd, char **line)
 		str = ft_strjoin(str, buf);
 		free(tmp);
 		if (ft_strchr(str, '\n'))
-		{
-			ret = 0;
 			break ;
-		}
-		
 	}
 	free(buf);
 	buf = NULL;
