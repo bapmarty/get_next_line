@@ -12,4 +12,4 @@
 # **************************************************************************** #
 
 #gcc -Wall -Wextra -Werror -g3 -fsanitize=address -D BUFFER_SIZE=12 _main.c get_next_line.c get_next_line_utils.c 
-gcc -Wall -Wextra -Werror -g3 -D BUFFER_SIZE=12 _main.c get_next_line.c get_next_line_utils.c 
+gcc -Wall -Wextra -Werror -g3 -D BUFFER_SIZE=100000 _main.c get_next_line.c get_next_line_utils.c 

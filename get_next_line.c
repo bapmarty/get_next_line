@@ -54,6 +54,7 @@ int				get_next_line(int fd, char **line)
 	char			*buf;
 	char			*tmp;
 	ssize_t			ret;
+	int				findedline;
 
 
 	if (BUFFER_SIZE < 1 || fd < 0 || !line
@@ -68,14 +69,18 @@ int				get_next_line(int fd, char **line)
 		str = ft_strjoin(str, buf);
 		free(tmp);
 		if (ft_strchr(str, '\n'))
+		{
+			ret = 0;
 			break ;
+		}
+		
 	}
 	free(buf);
 	buf = NULL;
 	if (ret < 0)
 		return (-1);
-	int i = get_line(&str, line);
-
-	return (i);
-	//return (get_line(&str, line));
+	findedline = get_line(&str, line);
+	if (*line == NULL)
+		free(str);
+	return (findedline);
 }

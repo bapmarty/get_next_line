@@ -30,7 +30,7 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	size_t	j;
 	size_t	s1len;
 	size_t	s2len;
-	char	*str;
+	char		*str;
 
 	s1len = ft_strlen(s1);
 	s2len = ft_strlen(s2);
