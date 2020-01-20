@@ -6,7 +6,7 @@
 /*   By: bapmarti <bapmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 18:01:13 by bapmarti          #+#    #+#             */
-/*   Updated: 2020/01/13 21:18:29 by bapmarti         ###   ########.fr       */
+/*   Updated: 2020/01/20 11:42:53 by bapmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,8 @@ int				get_next_line(int fd, char **line)
 {
 	static char		*str;
 	char			*buf;
-	char			*tmp;
 	ssize_t			ret;
 	int				findedline;
-
 
 	if (BUFFER_SIZE < 1 || fd < 0 || !line
 		|| !(buf = malloc(sizeof(char) * (BUFFER_SIZE + 1))))
@@ -65,14 +63,11 @@ int				get_next_line(int fd, char **line)
 		buf[ret] = '\0';
 		if (str == NULL)
 			str = ft_strnew(1);
-		tmp = str;
-		str = ft_strjoin(str, buf);
-		free(tmp);
+		str = ft_strjoin_free(str, buf);
 		if (ft_strchr(str, '\n'))
 			break ;
 	}
 	free(buf);
-	buf = NULL;
 	if (ret < 0)
 		return (-1);
 	findedline = get_line(&str, line);
