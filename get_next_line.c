@@ -6,7 +6,7 @@
 /*   By: bapmarti <bapmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 18:01:13 by bapmarti          #+#    #+#             */
-/*   Updated: 2020/01/20 11:42:53 by bapmarti         ###   ########.fr       */
+/*   Updated: 2020/01/20 11:56:23 by bapmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ static int		get_line(char **str, char **line)
 	int		pos;
 
 	if ((pos = find_next_line(*str)) == -1)
-		return (-1);
+		return (0);
 	*line = ft_substr(*str, 0, pos);
 	tmp = ft_substr(*str, pos + 1, ft_strlen(*str) - pos);
 	free(*str);
