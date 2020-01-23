@@ -6,7 +6,7 @@
 /*   By: bapmarti <bapmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/22 17:59:31 by bapmarti          #+#    #+#             */
-/*   Updated: 2020/01/20 11:42:32 by bapmarti         ###   ########.fr       */
+/*   Updated: 2020/01/23 16:27:29 by bapmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <stddef.h>
 
 int		get_next_line(int fd, char **line);
 

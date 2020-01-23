@@ -6,12 +6,10 @@
 /*   By: bapmarti <bapmarti@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/11/27 14:42:35 by bapmarti          #+#    #+#             */
-/*   Updated: 2020/01/20 11:42:11 by bapmarti         ###   ########.fr       */
+/*   Updated: 2020/01/23 16:27:02 by bapmarti         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
-#include <string.h>
 #include "get_next_line.h"
 
 size_t	ft_strlen(const char *s)
